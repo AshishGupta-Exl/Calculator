@@ -8,7 +8,11 @@ just an ES module engine, a bit of DOM glue, and CSS.
 ```bash
 npm start        # serves the app at http://localhost:4173
 npm test         # runs the engine unit tests
+npm run test:ui  # drives the real page in headless Chrome and saves screenshots
 ```
+
+`npm test` needs nothing but Node 18+. `npm run test:ui` additionally needs a local Chrome or
+Chromium binary; set `CHROME_PATH` if it is not in one of the usual locations.
 
 `npm start` uses a small static server (`scripts/serve.js`) because browsers refuse to load
 ES modules over `file://`. Any other static server works too.
@@ -47,6 +51,7 @@ src/calculator.js     the engine — pure state machine, no DOM
 src/app.js            DOM bindings, keyboard handling, theme switching
 test/calculator.test.js  engine unit tests (node:test)
 scripts/serve.js      dependency-free static server for `npm start`
+scripts/ui-check.mjs  headless-browser smoke test and screenshot capture
 ```
 
 The engine in `src/calculator.js` is deliberately DOM-free: it exposes `inputDigit`,

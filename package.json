@@ -9,6 +9,10 @@
   },
   "scripts": {
     "start": "node scripts/serve.js",
-    "test": "node --test \"test/**/*.test.js\""
+    "test": "node --test \"test/**/*.test.js\"",
+    "test:ui": "node scripts/ui-check.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.9.0"
   }
 }

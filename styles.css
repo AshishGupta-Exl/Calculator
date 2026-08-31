@@ -18,6 +18,7 @@
   --accent: #ff8a3d;
   --accent-strong: #ff6f1f;
   --accent-soft: rgba(255, 138, 61, 0.16);
+  --accent-soft-hover: rgba(255, 138, 61, 0.3);
   --accent-contrast: #1a1005;
   --focus-ring: rgba(255, 175, 120, 0.85);
 }
@@ -37,6 +38,7 @@
   --accent: #ff7a26;
   --accent-strong: #f26510;
   --accent-soft: rgba(255, 122, 38, 0.14);
+  --accent-soft-hover: rgba(255, 122, 38, 0.26);
   --accent-contrast: #fffaf5;
   --focus-ring: rgba(242, 101, 16, 0.6);
 }
@@ -201,10 +203,6 @@ body {
     color var(--transition);
 }
 
-.key:hover {
-  background: var(--key-bg-hover);
-}
-
 .key:active,
 .key[data-pressed='true'] {
   transform: scale(0.94);
@@ -228,12 +226,6 @@ body {
   font-size: 1.55rem;
 }
 
-/* Marks the operator that the next entry will be applied to. */
-.key--operator[aria-pressed='true'] {
-  background: var(--accent);
-  color: var(--accent-contrast);
-}
-
 .key--equals {
   background: linear-gradient(180deg, var(--accent), var(--accent-strong));
   color: var(--accent-contrast);
@@ -241,8 +233,32 @@ body {
   box-shadow: 0 12px 24px -12px var(--accent-strong);
 }
 
-.key--equals:hover {
-  filter: brightness(1.06);
+/* Hover rules live together so the tinted keys keep their own colour. */
+@media (hover: hover) {
+  .key:hover {
+    background: var(--key-bg-hover);
+  }
+
+  .key--function:hover {
+    background: var(--key-function-bg);
+    filter: brightness(1.12);
+  }
+
+  .key--operator:hover {
+    background: var(--accent-soft-hover);
+  }
+
+  .key--equals:hover {
+    background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+    filter: brightness(1.08);
+  }
+}
+
+/* Marks the operator that the next entry will be applied to; wins over hover. */
+.key--operator[aria-pressed='true'],
+.key--operator[aria-pressed='true']:hover {
+  background: var(--accent);
+  color: var(--accent-contrast);
 }
 
 .hint {
